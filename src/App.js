@@ -3,7 +3,9 @@ import './App.css';
 import Routes from "./Routes";
 import NavBar from "./NavBar";
 import BlogContext from "./BlogContext";
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
+
+
 
 
 

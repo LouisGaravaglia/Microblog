@@ -1,7 +1,9 @@
 import React, { useState, useContext } from "react";
 import { v4 as uuid } from 'uuid';
 import {useHistory} from "react-router-dom";
-import BlogContext from "./BlogContext";
+import { useDispatch } from "react-redux";
+import {addPost} from "./actions";
+// import BlogContext from "./BlogContext";
 import './App.css';
 
 
@@ -9,9 +11,11 @@ import './App.css';
 
 function BlogForm() {
     const INITIAL_STATE = {title:"", description:"", body:""}
-    const {addPost} = useContext(BlogContext);
+    // UPDATED STATE MANAGEMENT TO REDUX
+    // const {addPost} = useContext(BlogContext);
     const [formData, setFormData] = useState(INITIAL_STATE);
     const history = useHistory();
+    const dispatch = useDispatch();
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -22,7 +26,8 @@ function BlogForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = uuid();
-        addPost({...formData, id});
+        dispatch(addPost({...formData, id}));
+        console.log("Ran handleSubmit", formData);
         setFormData(INITIAL_STATE);
         history.push("/")
     }
