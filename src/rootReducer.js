@@ -9,7 +9,7 @@ function rootReducer(state=INITIAL_STATE, action) {
             console.log("ADDING A POST: ", state.posts);
             return {...state, posts: [...state.posts, action.post]};
         case REMOVE_POST:
-            return "";
+            return {...state, posts: state.posts.filter(post => post.id !== action.id)}
         case EDIT_POST:
             return "";
         default:

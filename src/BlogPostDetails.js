@@ -1,8 +1,8 @@
 import React, {useContext, useState, useEffect} from "react";
 import {useParams, useHistory} from "react-router-dom";
-import BlogContext from "./BlogContext";
+// import BlogContext from "./BlogContext";
 import { v4 as uuid } from 'uuid';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {removePost, editPost} from "./actions";
 import './App.css';
 
@@ -10,7 +10,9 @@ function BlogPostDetails() {
   const INITIAL_STATE = {title:"", description:"", body:""}
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isHidden, setIsHidden] = useState(true);
-  const {posts} = useContext(BlogContext);
+  // refactored to use Redux for state management
+  // const {posts} = useContext(BlogContext);
+  const posts = useSelector(store => store.posts);
   const {id} = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function BlogPostDetails() {
     }
     const toggleEditPostForm = () => {
       setIsHidden(boolean => !boolean)
+      console.log("Toggling: ", isHidden);
     }
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -36,19 +39,6 @@ function BlogPostDetails() {
     dispatch(removePost(postId));
     history.push("/")
   }
-  // const edit = (postId, newPost) => {
-  //   dispatch(editPost(postId, newPost))
-  // }
-  // useEffect(() => {
-  //     const getClassNames = () => {
-  //   if (isHidden) {
-  //     return "BlogForm hidden"
-  //   } else {
-  //     return "BlogForm"
-  //   }
-  // }
-  // getClassNames();
-  // }, [isHidden])
 
   return (
     <div className="BlogPostDetails">
@@ -61,7 +51,7 @@ function BlogPostDetails() {
       <button onClick={toggleEditPostForm}>EDIT</button>
       <br></br>
       <hr/>
-      <div className={"BlogForm " + isHidden ? "hidden" : ""}>
+      <div className={isHidden ? "BlogPost hidden" : "BlogPost"}>
     <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input
