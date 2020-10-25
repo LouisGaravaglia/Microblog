@@ -17,3 +17,30 @@
   margin-right: 20px;
   text-decoration: none;
 }
+
+label {
+  display: block;
+}
+
+input {
+  margin-bottom: 30px;
+  width: 370px;
+}
+
+.BlogForm {
+  margin: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: rgb(0, 0, 0);
+  color: aliceblue;
+  border: none;
+  display: block;
+  margin-top: 30px;
+}
+
+button:hover {
+  background-color: rgb(57, 57, 57);
+  color: aliceblue;
+}

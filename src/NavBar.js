@@ -9,7 +9,7 @@ function NavBar() {
         <h1>MICROBLOG</h1>
         <h5>Dive into the world of blogging.</h5>
         <NavLink className="NavBarLink" to="/">BLOG</NavLink>
-        <NavLink className="NavBarLink" to="/">ADD A NEW POST</NavLink>
+        <NavLink className="NavBarLink" to="/new">ADD A NEW POST</NavLink>
     </div>
   );
 }
