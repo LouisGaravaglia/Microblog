@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { v4 as uuid } from 'uuid';
 import {useHistory} from "react-router-dom";
 import BlogContext from "./BlogContext";
 import './App.css';
@@ -9,7 +10,7 @@ import './App.css';
 function BlogForm() {
     const INITIAL_STATE = {title:"", description:"", body:""}
     const {addPost} = useContext(BlogContext);
-    const [formData, setFormData] = useState(INITIAL_STATE)
+    const [formData, setFormData] = useState(INITIAL_STATE);
     const history = useHistory();
     const handleChange = (e) => {
         const {name, value} = e.target;
@@ -20,7 +21,8 @@ function BlogForm() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        addPost(formData);
+        const id = uuid();
+        addPost({...formData, id});
         setFormData(INITIAL_STATE);
         history.push("/")
     }

@@ -2,6 +2,7 @@ import React from "react";
 import {Switch, Route, Redirect} from "react-router-dom";
 import BlogList from "./BlogList";
 import BlogForm from "./BlogForm";
+import BlogPostDetails from "./BlogPostDetails"
 import './App.css';
 
 function Routes() {
@@ -9,6 +10,7 @@ function Routes() {
     <Switch>
         <Route exact path="/"><BlogList/></Route>
         <Route exact path="/new"><BlogForm/></Route>
+        <Route exact path="/:id"><BlogPostDetails/></Route>
         <Redirect to="/"/>
     </Switch>
   )
