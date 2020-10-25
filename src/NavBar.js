@@ -3,13 +3,15 @@ import {NavLink} from "react-router-dom";
 
 import './App.css';
 
-function Routes() {
+function NavBar() {
   return (
-    <div className="Routes">
-        <NavLink exact path="/">BLOG</NavLink>
-        <NavLink exact path="/">ADD A NEW POST</NavLink>
+    <div className="NavBar">
+        <h1>MICROBLOG</h1>
+        <h5>Dive into the world of blogging.</h5>
+        <NavLink className="NavBarLink" to="/">BLOG</NavLink>
+        <NavLink className="NavBarLink" to="/">ADD A NEW POST</NavLink>
     </div>
   );
 }
 
-export default Routes;
+export default NavBar;
