@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {useHistory} from "react-router-dom";
+import BlogContext from "./BlogContext";
 import './App.css';
 
 
@@ -6,7 +8,9 @@ import './App.css';
 
 function BlogForm() {
     const INITIAL_STATE = {title:"", description:"", body:""}
+    const {addPost} = useContext(BlogContext);
     const [formData, setFormData] = useState(INITIAL_STATE)
+    const history = useHistory();
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -16,8 +20,9 @@ function BlogForm() {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        addPost(formData);
         setFormData(INITIAL_STATE);
+        history.push("/")
     }
   return (
     <div className="BlogForm">
@@ -42,23 +47,14 @@ function BlogForm() {
         />
         <label htmlFor="body">Body:</label>
         <textarea 
-        rows = "10" 
-        cols = "46" 
-        id="body"
-        name="body"
-        placeholder="Body"
-        value={formData.body}
-        onChange={handleChange}
-        >
-         </textarea>
-        {/* <input
-            type="text"
+            rows = "10" 
+            cols = "46" 
             id="body"
             name="body"
             placeholder="Body"
             value={formData.body}
             onChange={handleChange}
-        /> */}
+        ></textarea>
         <button>SUBMIT</button>
     </form>
     </div>
