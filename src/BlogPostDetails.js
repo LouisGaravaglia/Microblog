@@ -26,12 +26,10 @@ function BlogPostDetails() {
     }
     const toggleEditPostForm = () => {
       setIsHidden(boolean => !boolean)
-      console.log("Toggling: ", isHidden);
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        const id = uuid();
-        editPost({...formData, id});
+        dispatch(editPost(id, formData));
         setFormData(INITIAL_STATE);
         
     }
@@ -45,7 +43,6 @@ function BlogPostDetails() {
       <h3>Title: {post[0].title}</h3>
       <h5>Description: {post[0].description}</h5>
       <p>Body: {post[0].body}</p>
-      <p>Id: {post[0].id}</p>
       <br></br>
       <button onClick={() => remove(id)}>DELETE</button>
       <button onClick={toggleEditPostForm}>EDIT</button>
