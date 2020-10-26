@@ -4,6 +4,8 @@ import {useParams, useHistory} from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
 import {removePost, editPost} from "./actions";
+import {getPosts} from "./actionCreators";
+import axios from "axios";
 import BlogComments from "./BlogComments";
 import './App.css';
 
@@ -11,13 +13,19 @@ function BlogPostDetails() {
   const INITIAL_STATE = {title:"", description:"", body:""}
   const [formData, setFormData] = useState(INITIAL_STATE);
   const [isHidden, setIsHidden] = useState(true);
+  const POSTS_URL = "http://localhost:5000/api/posts"
+
   // refactored to use Redux for state management
   // const {posts} = useContext(BlogContext);
   const posts = useSelector(store => store.posts);
   const {id} = useParams();
+  console.log("MY ID: ", id);
+  // console.log("posts[0].id", posts[0].id);
   const history = useHistory();
   const dispatch = useDispatch();
-  const post = posts.filter(p => p.id === id);
+  console.log("THE POSTS: ", posts);
+  const post = posts.filter(p => p.id === +id);
+  console.log("MY POST: ", post[0]);
   const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData(data => ({
@@ -34,17 +42,19 @@ function BlogPostDetails() {
         setFormData(INITIAL_STATE);
         
     }
-  const remove = (postId)  => {
-    dispatch(removePost(postId));
+  const remove = async (postId)  => {
+    const res = await axios.delete(POSTS_URL + `/${postId}`);
+    console.log("RES = : ", res);
+    dispatch(getPosts());
     history.push("/")
   }
 
   return (
     <div className="BlogPostDetails">
     
-      <h3>Title: {post[0].title}</h3>
-      <h5>Description: {post[0].description}</h5>
-      <p>Body: {post[0].body}</p>
+      <h3>Title: {post[0]["title"]}</h3>
+      <h5>Description: {post[0]["description"]}</h5>
+      <p>Body: {post[0]["body"]}</p>
       <br></br>
       <button onClick={() => remove(id)}>DELETE</button>
       <button onClick={toggleEditPostForm}>EDIT</button>

@@ -2,7 +2,8 @@ import React, { useState, useContext } from "react";
 import { v4 as uuid } from 'uuid';
 import {useHistory} from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {addPost} from "./actions";
+// import {addPost} from "./actions";
+import {addPost} from "./actionCreators";
 // import BlogContext from "./BlogContext";
 import './App.css';
 
@@ -26,7 +27,8 @@ function BlogForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const id = uuid();
-        dispatch(addPost({...formData, id}));
+        // dispatch(addPost({...formData, id}));
+        dispatch(addPost(formData))
         console.log("Ran handleSubmit", formData);
         setFormData(INITIAL_STATE);
         history.push("/")

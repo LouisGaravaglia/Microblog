@@ -9,7 +9,7 @@ function BlogComments({id}) {
   const [comment, setComment] = useState("");
   const posts = useSelector(store => store.posts)
   const post = posts.filter(post => post.id === id);
-  const existingComments = post[0]["comments"];
+  const existingComments = post["comments"];
   const dispatch = useDispatch();
   console.log("post: ", post);
   console.log("EXISTING COMMENTS!: ", existingComments);
@@ -36,7 +36,6 @@ function BlogComments({id}) {
   return (
       
     <div className="BlogComments">
-    <hr/>
     <h3>Comments</h3>
     {mappedComments}
       {/* {existingComments.map(c => <BlogCommentDetails remove={() => remove(id, c.id)} key={c.id} commentId={c.id} comment={c.comment}/>)} */}
