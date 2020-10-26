@@ -12,7 +12,6 @@ function BlogPost({title, description, body, id}) {
     <div className="BlogPost">
     <h3>Title: {title}</h3>
     <h5>Description: {description}</h5>
-    <p>Body: {body}</p>
     <hr/>
     </div>
     </Link>

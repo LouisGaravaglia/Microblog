@@ -73,3 +73,12 @@ button:hover {
 .hidden {
   display: none;
 }
+
+.BlogCommentDelete {
+  font-weight: 900;
+  border-style: solid;
+  border-color: red;
+  margin: 0 10px;
+  color: red;
+}
+

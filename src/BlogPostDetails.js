@@ -4,6 +4,7 @@ import {useParams, useHistory} from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
 import {removePost, editPost} from "./actions";
+import BlogComments from "./BlogComments";
 import './App.css';
 
 function BlogPostDetails() {
@@ -81,6 +82,7 @@ function BlogPostDetails() {
         <button>SUBMIT</button>
     </form>
     </div>
+     <BlogComments id={id}/>
     </div>
   )
 }
