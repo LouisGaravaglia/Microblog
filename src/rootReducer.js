@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS } from "./actionTypes";
 const INITIAL_STATE = {posts: []};
 
 
@@ -35,6 +35,9 @@ function rootReducer(state=INITIAL_STATE, action) {
             postRemovingComment[0]["comments"] = removedComment;
             const otherPosts = state.posts.filter(post => post.id !== action.postId)
             return {...state, posts: [...otherPosts, ...postRemovingComment]}
+        case GET_POSTS:
+            console.log("ACTION.POSTS", action.posts);
+            return {...state, posts: [...action.posts]}
         default:
             return state;
     }

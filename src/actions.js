@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS } from "./actionTypes";
 
  export const addPost = (post) => {
       return {type:ADD_POST, post};
@@ -18,4 +18,8 @@ export const removePost = (id) => {
 
   export const removeComment = (postId, commentId) => {
       return {type:REMOVE_COMMENT, postId, commentId}
+  };
+
+    export const getPosts = (posts) => {
+      return {type:GET_POSTS, posts}
   };
