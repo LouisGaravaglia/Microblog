@@ -41,6 +41,7 @@ function BlogPostDetails() {
 
   return (
     <div className="BlogPostDetails">
+    
       <h3>Title: {post[0].title}</h3>
       <h5>Description: {post[0].description}</h5>
       <p>Body: {post[0].body}</p>
@@ -48,8 +49,9 @@ function BlogPostDetails() {
       <button onClick={() => remove(id)}>DELETE</button>
       <button onClick={toggleEditPostForm}>EDIT</button>
       <br></br>
-      <hr/>
-      <div className={isHidden ? "BlogPost hidden" : "BlogPost"}>
+     
+      <div className={isHidden ? "EditBlogPost hidden" : "EditBlogPost"}>
+       <hr/>
     <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input

@@ -34,7 +34,9 @@ function BlogComments({id}) {
   }
 
   return (
+      
     <div className="BlogComments">
+    <hr/>
     <h3>Comments</h3>
     {mappedComments}
       {/* {existingComments.map(c => <BlogCommentDetails remove={() => remove(id, c.id)} key={c.id} commentId={c.id} comment={c.comment}/>)} */}

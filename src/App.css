@@ -82,3 +82,9 @@ button:hover {
   color: red;
 }
 
+.EditBlogPost {
+  color: rgb(33, 33, 33);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  }
