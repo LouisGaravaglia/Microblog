@@ -23,3 +23,4 @@ export const removePost = (id) => {
     export const getPosts = (posts) => {
       return {type:GET_POSTS, posts}
   };
+

@@ -4,7 +4,7 @@ import {useParams, useHistory} from "react-router-dom";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
 import {removePost, editPost} from "./actions";
-import {getPosts} from "./actionCreators";
+import {getPosts, updatePost} from "./actionCreators";
 import axios from "axios";
 import BlogComments from "./BlogComments";
 import './App.css';
@@ -36,9 +36,12 @@ function BlogPostDetails() {
     const toggleEditPostForm = () => {
       setIsHidden(boolean => !boolean)
     }
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(editPost(id, formData));
+        // const res = await axios.put(POSTS_URL + `/${id}`, {data:formData});
+         dispatch(updatePost(formData, id));
+        // console.log("UPDATING POST", res);
+        // dispatch(editPost(id, formData));
         setFormData(INITIAL_STATE);
         
     }

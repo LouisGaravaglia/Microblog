@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST } from "./actionTypes";
 const INITIAL_STATE = {posts: []};
 
 
@@ -36,8 +36,10 @@ function rootReducer(state=INITIAL_STATE, action) {
             const otherPosts = state.posts.filter(post => post.id !== action.postId)
             return {...state, posts: [...otherPosts, ...postRemovingComment]}
         case GET_POSTS:
-            console.log("ACTION.POSTS", action.posts);
             return {...state, posts: [...action.posts]}
+         case UPDATE_POST:
+            const nonMatchingPosts = state.posts.filter(post => post.id !== +action.postId);
+            return {...state, posts: [...nonMatchingPosts, action.updatedPost]}
         default:
             return state;
     }

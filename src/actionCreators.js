@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST } from "./actionTypes";
 
 const POSTS_URL = "http://localhost:5000/api/posts"
 
@@ -15,6 +15,8 @@ const POSTS_URL = "http://localhost:5000/api/posts"
 //   return { type: "LOAD_TODOS", todos };
 // }
 
+
+////////////////////////////////// GET ALL POSTS //////////////////////////////////
 export function getPosts() {
     return async function(dispatch) {
         const res = await axios.get(POSTS_URL);
@@ -27,6 +29,7 @@ function retrievePosts(posts) {
     return {type:GET_POSTS, posts};
 }
 
+////////////////////////////////// ADD A POST //////////////////////////////////
 export function addPost(data) {
     return async function(dispatch) {
         console.log("THIS IS WHAT IM ADDING TO DATA: ", data);
@@ -39,6 +42,28 @@ export function addPost(data) {
         dispatch(retrievePosts(response.data));
     };
 }
+
+////////////////////////////////// UPDATE A POST //////////////////////////////////
+export function updatePost(data, id) {
+    return async function(dispatch) {
+        // console.log("THIS IS WHAT IM ADDING TO DATA: ", data);
+        console.log("THIS IS DATA: ", data);
+                console.log("THIS IS ID: ", id);
+
+        const res = await axios.put(POSTS_URL + `/${id}`, data);
+        console.log("RES AFTER PUT REQ: ", res);
+        // dispatch(getPosts())
+        dispatch(editPost(id, res.data))
+    };
+}
+
+  function editPost(postId, updatedPost) {
+    return {type:UPDATE_POST, postId, updatedPost};
+}
+
+//   function updatePost(id, newPost) {
+//     return {type:GET_POSTS, id, newPost};
+// }
 
 // function addNewPost(posts) {
 //     return {type:GET_POSTS, posts};
