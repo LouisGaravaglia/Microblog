@@ -3,8 +3,7 @@ import {useParams, useHistory} from "react-router-dom";
 // import BlogContext from "./BlogContext";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
-import {removePost, editPost} from "./actions";
-import {getPosts, updatePost} from "./actionCreators";
+import {getPosts, updatePost, removePost} from "./actionCreators";
 import axios from "axios";
 import BlogComments from "./BlogComments";
 import './App.css';
@@ -38,17 +37,12 @@ function BlogPostDetails() {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const res = await axios.put(POSTS_URL + `/${id}`, {data:formData});
-         dispatch(updatePost(formData, id));
-        // console.log("UPDATING POST", res);
-        // dispatch(editPost(id, formData));
+        dispatch(updatePost(formData, id));
         setFormData(INITIAL_STATE);
-        
     }
+
   const remove = async (postId)  => {
-    const res = await axios.delete(POSTS_URL + `/${postId}`);
-    console.log("RES = : ", res);
-    dispatch(getPosts());
+    dispatch(removePost(postId));
     history.push("/")
   }
 

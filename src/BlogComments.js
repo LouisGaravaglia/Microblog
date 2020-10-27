@@ -1,21 +1,26 @@
 import React, {useContext, useState, useEffect} from "react";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
-import {removeComment, addComment} from "./actions";
+import {removeComment} from "./actions";
+import {addComment} from "./actionCreators";
 import BlogCommentDetails from "./BlogCommentDetails";
 import './App.css';
 
 function BlogComments({id}) {
-  const [comment, setComment] = useState("");
+  const [text, setComment] = useState("");
   const posts = useSelector(store => store.posts)
-  const post = posts.filter(post => post.id === id);
-  const existingComments = post["comments"];
+  const post = posts.filter(post => post.id === +id);
+  const comments = useSelector(store => store.comments);
+  const existingComments = comments.filter(c => c.post_id === +id);
   const dispatch = useDispatch();
-  console.log("post: ", post);
-  console.log("EXISTING COMMENTS!: ", existingComments);
+
+// useEffect(()=> {
+//     dispatch(getComments(+id))
+// },[dispatch])
+
   let mappedComments; 
   if (existingComments) {
-    mappedComments = existingComments.map(c => <BlogCommentDetails remove={() => remove(id, c.commentId)} key={c.commentId} commentId={c.commentId} comment={c.comment}/>)
+    mappedComments = existingComments.map(c => <BlogCommentDetails remove={() => remove(+id, c.id)} key={c.id} commentId={c.id} comment={c.text}/>)
 
   }
   const handleChange = (e) => {
@@ -23,8 +28,7 @@ function BlogComments({id}) {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        const commentId = uuid();
-        dispatch(addComment(id, {commentId, comment}));
+        dispatch(addComment(+id, text));
         setComment("");
         
     }
@@ -44,7 +48,7 @@ function BlogComments({id}) {
             type="text"
             name="comment"
             placeholder="Comment"
-            value={comment}
+            value={text}
             onChange={handleChange}
         />
         <button>Add</button>
