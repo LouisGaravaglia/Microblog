@@ -10,7 +10,7 @@ function BlogList() {
     const posts = useSelector(store => store.posts);
     return (
       <div className="BlogList">
-          {posts.map((p, idx) => <BlogPost key={idx} id={p.id} title={p.title} description={p.description} body={p.body}/>)}
+          {posts.map((p, idx) => <BlogPost key={idx} id={p.id} title={p.title} description={p.description} votes={p.votes}/>)}
       </div>
     )
 }

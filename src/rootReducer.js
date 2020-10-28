@@ -1,4 +1,4 @@
-import { ADD_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS, ADD_VOTE } from "./actionTypes";
 const INITIAL_STATE = {posts: [], comments: []};
 
 function rootReducer(state=INITIAL_STATE, action) {
@@ -18,6 +18,11 @@ function rootReducer(state=INITIAL_STATE, action) {
             return {...state, posts: [...nonMatchingPosts, action.updatedPost]}
          case GET_COMMENTS:
             return {...state, comments: action.comments}
+         case ADD_VOTE:
+            const nonMatching = state.posts.filter(post => post.id !== +action.postId);
+            const updatedPost = state.posts.filter(post => post.id === +action.postId);
+            updatedPost[0]["votes"] = action.votes["votes"];
+            return {...state, posts: [...nonMatching, ...updatedPost]}
         default:
             return state;
     }

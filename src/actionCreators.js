@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS, ADD_VOTE } from "./actionTypes";
 
 const POSTS_URL = "http://localhost:5000/api/posts"
 
@@ -80,3 +80,13 @@ function deleteComment(postId, commentId) {
     return {type:REMOVE_COMMENT, postId, commentId};
 }
 
+////////////////////////////////// UPVOTE OR DOWNVOTE//////////////////////////////////
+export function addVote(postId, direction) {
+    return async function(dispatch) {
+        const res = await axios.post(POSTS_URL + `/${postId}/vote/${direction}`);
+        dispatch(updateVote(postId, res.data));
+    };
+}
+function updateVote(postId, votes) {
+    return {type:ADD_VOTE, postId, votes};
+}
