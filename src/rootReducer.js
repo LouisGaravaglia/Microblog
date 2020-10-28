@@ -12,7 +12,11 @@ function rootReducer(state=INITIAL_STATE, action) {
         case REMOVE_COMMENT:
             return {...state, comments: state.comments.filter(c => c.id !== +action.commentId)};
         case GET_POSTS:
-            return {...state, posts: [...action.posts]}
+            const posts = action.posts;
+            posts.sort(function(a, b) {
+                return b.votes - a.votes;
+            });
+            return {...state, posts: posts}
          case UPDATE_POST:
             const nonMatchingPosts = state.posts.filter(post => post.id !== +action.postId);
             return {...state, posts: [...nonMatchingPosts, action.updatedPost]}
@@ -22,7 +26,11 @@ function rootReducer(state=INITIAL_STATE, action) {
             const nonMatching = state.posts.filter(post => post.id !== +action.postId);
             const updatedPost = state.posts.filter(post => post.id === +action.postId);
             updatedPost[0]["votes"] = action.votes["votes"];
-            return {...state, posts: [...nonMatching, ...updatedPost]}
+            const postsSortedByVotes = [...nonMatching, ...updatedPost]
+            postsSortedByVotes.sort(function(a, b) {
+                return b.votes - a.votes;
+            });
+            return {...state, posts: postsSortedByVotes}
         default:
             return state;
     }
