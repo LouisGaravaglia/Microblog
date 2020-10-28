@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addComment, removeComment} from "./actionCreators";
 import BlogCommentDetails from "./BlogCommentDetails";
@@ -6,12 +6,9 @@ import './App.css';
 
 function BlogComments({id}) {
   const [text, setComment] = useState("");
-  const posts = useSelector(store => store.posts)
-  const post = posts.filter(post => post.id === +id);
   const comments = useSelector(store => store.comments);
   const existingComments = comments.filter(c => c.post_id === +id);
   const dispatch = useDispatch();
-
   const remove = (id, commentId)  => {
     dispatch(removeComment(id, commentId));
   }
@@ -28,15 +25,11 @@ function BlogComments({id}) {
         setComment("");
         
     }
-
-
-
   return (
       
     <div className="BlogComments">
     <h3>Comments</h3>
     {mappedComments}
-      {/* {existingComments.map(c => <BlogCommentDetails remove={() => remove(id, c.id)} key={c.id} commentId={c.id} comment={c.comment}/>)} */}
     <form onSubmit={handleSubmit}>
         <input
             type="text"

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ADD_POST, REMOVE_POST, EDIT_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS } from "./actionTypes";
+import { ADD_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT, GET_POSTS, UPDATE_POST, GET_COMMENTS } from "./actionTypes";
 
 const POSTS_URL = "http://localhost:5000/api/posts"
 
@@ -39,7 +39,7 @@ function editPost(postId, updatedPost) {
 ////////////////////////////////// REMOVE A POST //////////////////////////////////
 export function removePost(postId) {
     return async function(dispatch) {
-        const res = await axios.delete(POSTS_URL + `/${postId}`);
+        await axios.delete(POSTS_URL + `/${postId}`);
         dispatch(deletePost(postId));
     };
 }
@@ -72,7 +72,7 @@ function retrieveComments(comments) {
 ////////////////////////////////// REMOVE A COMMENT //////////////////////////////////
 export function removeComment(postId, commentId) {
     return async function(dispatch) {
-        const res = await axios.delete(POSTS_URL + `/${postId}/comments/${commentId}`);
+        await axios.delete(POSTS_URL + `/${postId}/comments/${commentId}`);
         dispatch(deleteComment(postId, commentId));
     };
 }
