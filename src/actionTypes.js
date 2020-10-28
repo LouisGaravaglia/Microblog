@@ -5,4 +5,4 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const GET_POSTS = "GET_POSTS";
 export const UPDATE_POST = "UPDATE_POST";
-export const GET_COMMENTS = "UPDATE_POST";
+export const GET_COMMENTS = "GET_COMMENTS";

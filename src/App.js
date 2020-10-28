@@ -20,23 +20,11 @@ const posts = useSelector(store => store.posts);
 //     dispatch(getTodosFromAPI())
 //   }, [dispatch]);
 
-//ATTEMP 1
+
 useEffect(()=> {
     dispatch(getPosts());
+    dispatch(getComments());
 },[dispatch])
-
-//ATTEMPT 2
-// useEffect(()=> {
-//   try {
-//     dispatch(() => {
-//       getPosts
-//     });
-//     console.log("POSTS", posts);
-//   } catch(e) {
-
-//   }
-
-// },[dispatch])
 
 
   return (

@@ -3,7 +3,7 @@ import {useParams, useHistory} from "react-router-dom";
 // import BlogContext from "./BlogContext";
 import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
-import {getPosts, updatePost, removePost} from "./actionCreators";
+import {getPosts, updatePost, removePost, getComments} from "./actionCreators";
 import axios from "axios";
 import BlogComments from "./BlogComments";
 import './App.css';
@@ -32,6 +32,10 @@ function BlogPostDetails() {
             [name]:value
         }))
     }
+    // useEffect(()=> {
+    //   dispatch(getComments());
+    // },[dispatch])
+
     const toggleEditPostForm = () => {
       setIsHidden(boolean => !boolean)
     }

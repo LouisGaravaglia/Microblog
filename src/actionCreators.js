@@ -59,14 +59,24 @@ function insertComment(postId, comment) {
 }
 
 ////////////////////////////////// GET COMMENTS //////////////////////////////////
-export function getComments(id) {
+export function getComments() {
     return async function(dispatch) {
-        const res = await axios.get(POSTS_URL + `/${id}/comments`);
-        dispatch(retrieveComments(id, res.data))
+        const res = await axios.get(POSTS_URL + `/0/comments`);
+        dispatch(retrieveComments(res.data))
     };
 }
-function retrieveComments(postId, comment) {
-    return {type:GET_COMMENTS, postId, comment};
+function retrieveComments(comments) {
+    return {type:GET_COMMENTS, comments};
 }
 
+////////////////////////////////// REMOVE A COMMENT //////////////////////////////////
+export function removeComment(postId, commentId) {
+    return async function(dispatch) {
+        const res = await axios.delete(POSTS_URL + `/${postId}/comments/${commentId}`);
+        dispatch(deleteComment(postId, commentId));
+    };
+}
+function deleteComment(postId, commentId) {
+    return {type:REMOVE_COMMENT, postId, commentId};
+}
 

@@ -1,8 +1,6 @@
 import React, {useContext, useState, useEffect} from "react";
-import { v4 as uuid } from 'uuid';
 import {useDispatch, useSelector} from "react-redux";
-import {removeComment} from "./actions";
-import {addComment} from "./actionCreators";
+import {addComment, removeComment} from "./actionCreators";
 import BlogCommentDetails from "./BlogCommentDetails";
 import './App.css';
 
@@ -14,14 +12,12 @@ function BlogComments({id}) {
   const existingComments = comments.filter(c => c.post_id === +id);
   const dispatch = useDispatch();
 
-// useEffect(()=> {
-//     dispatch(getComments(+id))
-// },[dispatch])
-
+  const remove = (id, commentId)  => {
+    dispatch(removeComment(id, commentId));
+  }
   let mappedComments; 
   if (existingComments) {
     mappedComments = existingComments.map(c => <BlogCommentDetails remove={() => remove(+id, c.id)} key={c.id} commentId={c.id} comment={c.text}/>)
-
   }
   const handleChange = (e) => {
         setComment(e.target.value);
@@ -33,9 +29,7 @@ function BlogComments({id}) {
         
     }
 
-  const remove = (id, commentId)  => {
-    dispatch(removeComment(id, commentId));
-  }
+
 
   return (
       

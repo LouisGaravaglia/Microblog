@@ -13,10 +13,16 @@ const router = express.Router({ mergeParams: true });
 
 router.get("/", async function (req, res, next) {
   try {
-    const result = await db.query(
+    let results;
+    if (req.params.post_id !== "0") {
+      results = await db.query(
       "SELECT id, text FROM comments WHERE post_id = $1 ORDER BY id",
       [req.params.post_id]);
-    return res.json(result.rows);
+    } else {
+      results = await db.query(
+      `SELECT * FROM comments`);
+    }
+    return res.json(results.rows);
   } catch (err) {
     return next(err);
   }
